@@ -1,0 +1,73 @@
+{% extends "profilebase.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}
+    <title> Watchdogit | Homepage</title>
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <h3 class="fw-light text-center fw-light text-dark text-decoration-underline">Welcome <span class="fst-italic">{{ user.username }}</span></h3>
+    </div>
+    <div class="container card my-3">
+        <h4 class="mt-3 bg-secondary py-2 rounded-3 text-light text-center fw-light">Create a repository for a student group</h4>
+        <div class="row card mt-3 mx-2">
+            <form method="POST" class="mt-2">
+                {% csrf_token %}
+                <!-- <legend class="form-label my-3 fs-5 fw-dark">Add group title and students' names to create a repository</legend> -->
+                <fieldset class="form-group text-dark">
+                    {{ repository_form | crispy }}
+                </fieldset>
+                <div class="text-center pt-1 mb-0">
+                    <button class="btn btn-block btn-outline-dark mb-2" type="submit">Create the Repository</button>
+                </div>
+            </form>
+        </div>
+        <br>
+        <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+        <h4 class="mt-2 bg-secondary py-2 rounded-3 text-light text-center fw-light">Add an existing repository</h4>
+        <div class="row">
+            <div class="col card bg-light justify-content-center align-items-center mx-4 my-3">
+                <form method="POST">
+                    {% csrf_token %}
+                    <legend class="form-label my-3 fs-5 fw-light" for="repo_link">Add a repository to track</legend>
+                    <fieldset class="form-group">
+                        {{ add_url_form | crispy }}
+                    </fieldset>
+                    <div class="text-center pt-1 mb-0">
+                        <button class="btn btn-block fa-lg btn-secondary mb-2" type="submit">Add URL</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col bg-light justify-content-center align-items-center mx-4 my-5">
+                <p class=" fs-5 fw-light text-muted my-3 mx-5">Added list of repositories</p>
+                    <ul class="overflow-auto shadow bg-white rounded-3 mx-5" style="max-height: 300px; max-width: 500px;">
+                        {% for url in urls %}
+                            <li class="row list-unstyled my-3">
+                                <a class="col btn btn-outline-secondary text-decoration-none text-dark me-2" href="{% url 'wdg-dashboard' url_id=url.id %}">{{ url.title }}</a>
+                                <a class="col delete-link text-decoration-none mt-3" href="{% url 'wdg-deleteurl' url.id %}"><i class="bi bi-trash3-fill"></i></a>
+                            </li>
+                            
+                            <!-- <button type="button" class="btn btn-outline-dark"><a href="{% url 'wdg-deleteurl' url.id %}" class="text-muted text-decoration-none">Delete {{url.title}}</a></button> -->
+                        {% empty %}
+                            <h3 class="me-4 my-1">No URLs Saved.</h3>
+                        {% endfor %}
+                    </ul>
+            </div>    
+        </div>
+    </div>
+<script>
+    const deleteLinks = document.querySelectorAll('.delete-link');
+    deleteLinks.forEach(link => {
+        link.addEventListener('click', event => {
+        event.preventDefault();
+        const urlId = link.getAttribute('data-url-id');
+        const confirmMsg = `Are you sure you want to DELETE this repository?`;
+        if (confirm(confirmMsg)) {
+            window.location.href = link.href;
+        }
+        });
+    });
+</script>
+{% endblock content %}
+
+

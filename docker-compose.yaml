@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  wdg-project:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/watchdogit
+      - static_volume:/watchdogit/static
+      - media_volume:/watchdogit/media
+    image: watchdogit:v1
+    ports:
+      - "8061:8000"
+    command: /watchdogit/entrypoint.sh
+
+volumes:
+  static_volume:
+  media_volume:

@@ -1,0 +1,45 @@
+{% extends "profilebase.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %} <title> Watchdogit | Profile</title> {% endblock title %}
+{% block content %}
+    <div class="container card my-3">
+        <div class="row py-3 my-3 mx-3 px-3">
+            <div class="col">
+                <div class="mx-5">
+                    <img src="{{ user.profile.image.url }}" alt="profile_picture" class="rounded-circle account-img" width="200px" height="200px">
+                </div>
+            </div>
+            <div class="col rounded-3 bg-secondary py-4 text-white">
+                <p>Username: {{ user.username }}<p>
+                <p>First Name: {{ user.first_name }}</p>
+                <p>Last Name: {{ user.last_name }}</p>
+                <p>Email: {{ user.email }}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            <!-- for updating the data passed in the form -->
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">
+                        Edit your profile
+                    </legend>
+                    {{ user_update_form | crispy }}
+                    {{ profile_update_form | crispy }}
+                </fieldset>
+                <div class="text-center pt-1 mb-0">
+                    <button class="btn btn-block fa-lg btn-secondary mb-2" type="submit">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container rounded-3 py-2 d-flex my-1 justify-content-center bg-secondary">
+        <h4 class="mb-2 me-0 text-light fw-lighter">Back to Homepage</h4>
+        <button type="button" class="btn-sm btn-outline-light mx-2"><a href="{% url 'wdg-home' %}" class="text-dark text-decoration-none">Home</a></button>
+    </div>
+{% endblock content %}
+
+
+

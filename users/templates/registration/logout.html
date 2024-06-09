@@ -1,0 +1,18 @@
+{% extends "userbase.html" %}
+{% block title %} <title> Watchdogit | Logout</title> {% endblock title %}
+{% block content %}
+    <br>
+    <div class="card py-5">
+        <div class="card my-2 py-2 bg-secondary mx-5">
+            <legend class="text-light mx-4 fw-light">You Have Been Logged Out!</legend>
+            <hr>
+            <div class="d-flex my-5 justify-content-center">
+                <h4 class="mb-2 me-0 text-light fw-lighter">Sign back in to your account </h4>
+                <button type="button" class="btn-sm btn-outline-light mx-2"><a href="{% url 'wdg-login' %}" class="text-dark text-decoration-none">Login</a></button>
+            </div>     
+        </div>
+    </div>
+{% endblock content %}
+
+
+

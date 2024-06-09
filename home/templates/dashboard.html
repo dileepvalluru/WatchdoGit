@@ -1,0 +1,72 @@
+{% extends "profilebase.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %} <title> Watchdogit | Dashboard</title> {% endblock title %}
+{% block content %}
+    <div class="container">
+        <h5 class="text-center text-secondary mt-2 mb-4 display-6">Welcome to the Dashboard of {{ url.title }} <span></span></h5>
+        <div class="row mb-2">
+            <div class="col card bg-white mx-1">
+                <h3 class="text-secondary mt-2 text-center">Repository Data</h3>
+                <hr><br>
+                <div class="text-center text-dark mb-2">
+                    {% for data in repo_data %}
+                        <li class="list-group-flush list-unstyled">{{ data }}</li>
+                    {% endfor %}
+                </div>
+                <div>
+                   <p>GitHub URL: <a href="{{github_url}}">{{github_url}}</a></p>
+                </div>
+            </div>
+            <div class="col card bg-white mx-1">
+                <h3 class="text-muted text-center mt-2">Branches</h3>
+                <hr>
+                <ul class="overflow-auto shadow bg-white rounded-3 mx-5" style="max-height: 750px; max-width: 300px;">
+                    {% for branch in branches %}
+                        <li class="list-group-flush">{{ branch.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col card bg-white mx-1">
+                <h3 class="text-muted mt-2 text-center">Contributors</h3>
+                <hr>
+                <ul class="overflow-auto shadow bg-white rounded-3 mx-5" style="max-height: 300px; max-width: 1000px;">
+                    {% for contributors in cons %}
+                        <li class="list-group-flush text-decoration-none"><a href="#" onclick="openPopup('{{ contributors }}')">{{ contributors }}</a></li>
+                    {% endfor %}
+                </ul>
+                <p href="#" class="mb-3 text-center">*Select a User to send a message</p>
+            </div>
+            <div class="col card bg-white mx-1">
+                <h3 class="text-muted mt-2 text-center">Total Commits</h3>
+                <hr><br><br>
+                <div class="display-1 text-center text-dark">{{total_commits}}</div>
+            </div>
+        </div>
+        <p class="text-secondary">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+        <div class="mb-2 card bg-light">
+            {{chart|safe}}
+        </div>
+        <div class="mb-2 card bg-light">
+            {{plot_lines|safe}}
+        </div>
+        <div class="mb-2 card bg-light">
+            {{plot|safe}}
+        </div>
+        <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+        <div class="mb-4 pb-4 card bg-light">
+            <h3 class="text-light py-2 bg-secondary text-center display-6">Code Quality</h3>
+                <a href="{% url 'wdg-codequality' url_id=url.id%}" class="align-items-center text-center mt-4 mb-2"><button class="btn btn-block btn-outline-secondary mb-2" type="submit">Check the Code Quality</button></a>
+            </div>
+        </div>
+    </div>
+<script>
+    function openPopup(name) 
+    {
+        window.open("{% url 'wdg-email' url_id=url.id%}?name="+name, "popupWindow", "width=600, height=400, scrollbars=yes");
+    }
+</script>
+{% endblock content %}
+
+
+    

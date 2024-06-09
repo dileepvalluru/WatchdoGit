@@ -1,0 +1,22 @@
+{% extends "userbase.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %} <title> Watchdogit | Sign-up</title> {% endblock title %}
+{% block bgcolour %} class = "" {% endblock bgcolour %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" class="container">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today!!!</legend>
+                {{ form| crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-secondary" type="submit">Sign-up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">Already have an account? <a class="ml-2" href="{% url 'wdg-login' %}">Login</a></small>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/icon.png' %}"/>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
+    {% block title %}{% endblock title %}
+</head>
+<body class="bg-image">
+    <div class="container rounded-3 card my-2 py-2 bg-secondary">
+        <div class=" container text-center">
+            <!-- {% load static %}  -->
+            <a class="text-muted" href="{% url 'wdg-login' %}"><img class="btn btn-outline-light" src="{% static 'images/logoblack.png' %}" alt="logo image" width="280px" height="65px"></a>
+        </div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

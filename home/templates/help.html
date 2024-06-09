@@ -1,0 +1,121 @@
+{% extends "profilebase.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} <title> Watchdogit | Help</title> {% endblock title %}
+{% block content %}
+    <div class="container">
+        <p>Welcome to the help page for Watchdogit, the application that helps you keep track of
+        your GitHub repositories! Here you'll find a comprehensive guide on how
+        to use the application and get the most out of its features.</p>
+        <h3 class="fw-light">Registration</h3>
+        <p>To register a new account, click on the "Register" button on the login screen. You'll be
+        prompted to enter your name, email address, and a password for your new account. Once you've
+        entered all the information, click on the "Register" button to create your account.</p>
+        <h3 class="fw-light">Login</h3>
+        <p>To log in to your account, enter your username and password on the login screen, and 
+        click on the "Log In" button. If you've entered the correct credentials, you'll be taken 
+        to the user homepage.</p>
+        <h3 class="fw-light">Logout</h3>
+        <p>To log out of your account, click on the "Log Out" button in the navigation bar. This 
+        will log you out of the application and return you to the login screen.</p>
+        <h3 class="fw-light">Password Reset</h3>
+        <p>TO reset your password, click on the "forgotten password" link in the homepage. This
+        will prompt you to enter your email address, to which a password reset link will be sent.
+        </p>
+        <h3 class="fw-light">Profile</h3>
+        <p>The profile page of the application displays the user information like the username, email,
+        firstname, and the lastname. The same page can be used to update the user information, and the
+        profile picture.
+        </p>
+        <h3 class="fw-light">Homepage</h3>
+        <h4 class="fw-light">Create a new repository on behalf of a student group</h4>
+        <p>To create a new repository for a student group using the WatchdoGit application, 
+        the user must first provide the group name in the designated "Title" section. The next 
+        step involves identifying all the GitHub usernames of the contributors or students within 
+        the group, which are to be entered in the designated "Students" section. Once these fields 
+        have been completed, the user may proceed to initiate the creation of the new repository by 
+        clicking on the "Create the Repository" button. This action will prompt the WatchdoGit 
+        application to generate a new repository, inclusive of all contributors previously 
+        identified by the user, under the WatchdoGit organization.
+        </p>
+        <h4 class="fw-light">Add an existing repository</h4>
+        <p>In the event that the user desires to incorporate an existing GitHub repository into 
+        their watchlist on the WatchdoGit platform, they may utilize the second option displayed 
+        on the homepage. This involves the entry of the repository's URL in the designated "URL" 
+        section, accompanied by the corresponding student group's name within the "Title" section.
+        </p>
+        <p>Whether the GitHub repo is added using a URL or by creating a new repository, it will
+        be added to the watch list under the "Added list of repositories" section. Dashboard of a 
+        repo can be accessed by selecting the repository from this list.
+        </p>
+        <p>The utilization of the WatchdoGit platform's homepage is readily accessible to the user
+        through the selection of the designated "WatchdoGit" logo featured within the navigation bar.
+        This feature ensures convenient and efficient access to the homepage from any page within the
+        application.</p>
+        <h3 class="fw-light">Respository Dashboard</h3>
+        <h3 class="fw-light">Cards</h3>
+        <h4 class="fw-light">Repository Data</h4>
+        <p>In this card repository data of the selected repository like created date, latest
+        update date, repository age, visibility status, default branch, forks count, tags count,
+        and the URL link is displayed.  
+        </p>
+        <h4 class="fw-light">Branches</h4>
+        <p>All the branch names of the repository will be displayed in this card.</p>
+        <h4 class="fw-light">Contributors</h4>
+        <p>All the contributors of the repository will be displayed in this card.</p>
+        <p>Any contributor can be selected to send a custom message.</p>
+        <h4 class="fw-light">Commits</h4>
+        <p>All the commits from all the branches will be displayed in this card.</p>
+        <h3 class="fw-light">Graphs</h3>
+        <h4 class="fw-light">Contributor vs. commits</h4>
+        <p>This graph is a visual representation of the contributor and the total number of commits 
+        made by the contributor.The contributor graph is a crucial feature of the WatchdoGit platform,
+        as it provides valuable insights into the progress of a project and the level of individual contributions 
+        made by each member of a student group. Through the utilization of this feature, professors 
+        and evaluators can effectively identify areas of strengths and weaknesses, providing 
+        targeted feedback and support to individual contributors for optimal project outcomes.</p>
+        <h4 class="fw-light">Authors vs. Total lines of code</h4>
+        <p>The graph showcasing the total lines of code committed by each author provides a visual 
+        representation of the amount of code contributed by individual authors to a GitHub repository. 
+        It tracks the changes in the codebase over a specified period and highlights the total 
+        number of lines of code added by each author.</p>
+        <h4 class="fw-light">Languages</h4>
+        <p>All the Languages (programmatic) used in the repository are displayed through this graph</p>
+        <h4 class="fw-light">Code Quality Button</h4>
+        <p>This button at the bottom of the repository dashboard will redirect the user to the 
+        code quality page of the repository</p>
+        <h3 class="fw-light">Code Quality</h3>
+        <p>The cyclomatic complexity vs. commits timeline is a graph that displays the relationship 
+        between the cyclomatic complexity of a GitHub repository and the corresponding commits made 
+        over a specified period. Cyclomatic complexity refers to the degree of difficulty in 
+        comprehending and maintaining the codebase of a software program. It is a measure of the 
+        complexity of a program's control flow structure and the number of possible execution paths 
+        through the code. The graph showcases each commit made to the repository over time, with the 
+        size of each point representing the corresponding cyclomatic complexity of the code at that 
+        particular commit. The cyclomatic complexity vs. commits timeline feature enables the 
+        evaluation of the relationship between the complexity of the codebase and the level of 
+        activity in terms of commits, providing valuable insights into the progression of the project 
+        and the impact of individual contributions.</p>
+        <p>This feature is particularly useful for professors and evaluators in monitoring the progress 
+        of a student group's project, as it provides a comprehensive overview of the level of 
+        complexity of the codebase and the corresponding activity of the individual contributors. 
+        By utilizing this graph, evaluators can identify potential issues with the codebase and 
+        provide targeted feedback and support to ensure optimal project outcomes
+        </p>
+        <h3 class="fw-light">Code Churn</h3>
+        <p>The code churn vs. commits graph is a visual representation of the code churn 
+        (i.e., the amount of code added or removed) within a GitHub repository, and the 
+        corresponding commit made over a specified period. This feature provides valuable insights 
+        into the level of activity within the repository and the impact of individual contributions 
+        on the codebase.</p>
+        <p>The graph showcases each commit made to the repository over time, with the size of each 
+        point representing the corresponding amount of code churn for that particular commit. 
+        The code churn vs. commits graph allows for a quick and easy visualization of the level of 
+        activity within the repository, highlighting the extent of individual contributions and the 
+        overall progression of the project.</p>
+    </div>
+    <div class="text-center mt-5 mb-5">
+        <a href="{% static 'help.docx' %}" class="btn btn-block btn-outline-dark text-center" type="submit">Download the help document</a>
+    </div>
+{% endblock content %}
