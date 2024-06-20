@@ -11,3 +11,4 @@ jobs:
               run: |
                 echo "Hello World"
                 echo "Hello World2"
+                echo "latest"
