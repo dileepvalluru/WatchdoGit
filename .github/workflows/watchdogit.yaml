@@ -29,7 +29,7 @@ jobs:
 
     - name: Build and push Docker image to ECR
       env:
-        ECR_REGISTRY: ${{ secrets.ECR_REPOSITORY_URI }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: watchdogit-cluster  # replace with your ECR repository name
         IMAGE_TAG: latest  # you can customize your tag here
       run: |
