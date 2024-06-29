@@ -19,10 +19,12 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
+      with:
+        region: eu-west-1
 
     - name: Build and push Docker image to ECR
       env:
-        ECR_REGISTRY: 
+        ECR_REGISTRY: ${{ secrets.ECR_REPOSITORY_URI }}
         ECR_REPOSITORY: watchdogit-cluster  # replace with your ECR repository name
         IMAGE_TAG: latest  # you can customize your tag here
       run: |
