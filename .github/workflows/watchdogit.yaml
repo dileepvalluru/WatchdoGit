@@ -41,11 +41,10 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
+    
+    - name: Set up kubeconfig
+      run: |
+        aws eks update-kubeconfig --name watchdogit-cluster --region eu-west-1
     - name: Deploy to EKS
       run: |
-        pwd
-        ls -al
-        ls -al ..
-        ls -al ../..
         kubectl apply -f ./deployments/deployment.yaml
