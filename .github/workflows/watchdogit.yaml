@@ -45,4 +45,7 @@ jobs:
     - name: Deploy to EKS
       run: |
         pwd
-        kubectl apply -f ../deployments/deployment.yaml
+        ls -al
+        ls -al ..
+        ls -al ../..
+        kubectl apply -f ./deployments/deployment.yaml
