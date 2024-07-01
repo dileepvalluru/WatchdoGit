@@ -8,14 +8,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+     
     steps:
-    - name: Checkout repository
+    - name: Checkout repository  #checkout the code
       uses: actions/checkout@v2
 
+    - name: Kubectl tool installer  #install kubectl tool
+      uses: Azure/setup-kubectl@v4.0.0
+  
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-
+      
+      #Configure AWS credentials
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -23,10 +27,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-1
 
+      #Login to the ECR registry
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
-
+      
+      #Build and push the docker image into AWS ECR
     - name: Build and push Docker image to ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -37,9 +43,5 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Deploy to EKS
-        uses: aws-actions/eks-deploy@v1
-        with:
-          cluster-name: watchdogit-cluster  # Replace with your EKS cluster name
-          kubeconfig: ${{ secrets.KUBECONFIG }}  # Replace with your kubeconfig secret name
-          region: eu-west-1
-          deployment-config: .github/deployments/deployment.yml  # Replace with your deployment configuration file
+      run: |
+        kubectl apply -f .github/deployment/deployment.yaml
