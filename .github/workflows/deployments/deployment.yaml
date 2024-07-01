@@ -1,0 +1,43 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watchdogit-deployment
+  namespace: default
+  labels:
+    app: watchdogit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watchdogit
+  template:
+    metadata:
+      labels:
+        app: watchdogit
+    spec:
+      containers:
+      - name: watchdogit
+        image: 137354898470.dkr.ecr.eu-west-1.amazonaws.com/watchdogit-eks-repo:latest
+        # envFrom:
+        # - secretRef:
+        #     name: watchdogit-secrets
+        ports:
+        - containerPort: 8000
+
+---
+#Service
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: watchdogit-loadbalancer-service
+  namespace: default
+spec:
+  selector:
+    app: watchdogit
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8000
+      protocol: TCP
