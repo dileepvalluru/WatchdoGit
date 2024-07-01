@@ -47,7 +47,7 @@ jobs:
         mkdir -p $HOME/.kube
         ls $HOME/.kube
         echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/kubeconfig
-
+#Changed the kubeconfig file
     - name: Validate Kubernetes deployment file
       run: kubectl apply --dry-run=client --validate=true -f ./deployments/deployment.yaml
     - name: Deploy to EKS
