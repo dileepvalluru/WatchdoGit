@@ -15,12 +15,6 @@ jobs:
 
     - name: Kubectl tool installer  #install kubectl tool
       uses: Azure/setup-kubectl@v4.0.0
-
-    # - name: Print working directory and list files
-    #   run: |
-    #     pwd
-    #     ls -al
-    #     ls -al ./deployments
   
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -50,4 +44,5 @@ jobs:
 
     - name: Deploy to EKS
       run: |
+        pwd
         kubectl apply -f ../deployments/deployment.yaml
