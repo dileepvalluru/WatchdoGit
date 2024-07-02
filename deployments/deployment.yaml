@@ -18,8 +18,7 @@ spec:
     spec:
       containers:
       - name: watchdogit
-        image: 137354898470.dkr.ecr.eu-west-1.amazonaws.com/watchdogit-eks-repo:latest
-        # envFrom:
+        image: 137354898470.dkr.ecr.eu-west-1.amazonaws.com/watchdogit-eks-repo:DOCKER_IMAGE_TAG        # envFrom:
         # - secretRef:
         #     name: watchdogit-secrets
         ports:
